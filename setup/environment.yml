@@ -1,0 +1,17 @@
+# conda env create -f environment.yml
+# conda activate translingo
+
+name: translingo
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9.9
+  - numpy
+  - scipy
+  - pip
+  - pip:
+      - sounddevice
+      - pyaudio
+      - SpeechRecognition
+      - git+https://github.com/openai/whisper.git
