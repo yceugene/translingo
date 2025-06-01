@@ -49,6 +49,41 @@ pip install pyaudio
 pip install SpeechRecognition
 ```
 
+### 4. Run the program
+1. Run main.py
+``` bash
+% python main.py
+```
+
+2. Select mode
+``` bash
+Select mode:
+1. Manual recording with fixed duration (Whisper)
+2. Real-time streaming with simulated subtitle effect (Whisper)
+3. Manual recording with fixed duration (Google API)
+4. Real-time streaming (Google API)
+```
+
+#### Modes Explained:
+1. Manual recording with fixed duration (Whisper):
+Record a fixed-length audio clip via microphone and transcribe it using OpenAI's Whisper model.
+
+2. Real-time streaming with simulated subtitle effect (Whisper):
+Continuously capture microphone input and display live transcription using Whisper.
+
+3. Manual recording with fixed duration (Google API):
+Record a fixed-length audio sample and transcribe it using Google Speech Recognition.
+
+4. Real-time streaming (Google API):
+Continuously stream audio input from microphone and transcribe it in real time using Google API.
+
+**Note**:
+
+- For mode 1 and 2, ensure you are connected to the internet the first time you use each Whisper model (the model will be downloaded).
+
+- For mode 3 and 4, ensure you are connected to the internet every time (Google API is cloud-based).
+
+
 ## Project Structure
 ``` bash
 translingo/
