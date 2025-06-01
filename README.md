@@ -22,18 +22,31 @@ cd translingo
 
 ### 2. Create Python environment
 ``` bash
-conda create -n translingo python=3.9
+conda create -n translingo python=3.9.9
 conda activate translingo
 
 # To activate this environment, use $ conda activate translingo
 # To deactivate an active environment, use $ conda deactivate
 ```
 
-### 3. Install Dependencies
+### 3. Install Dependencies (Mac OS)
 - If you're on Apple Silicon (M1/M2), make sure PyTorch supports MPS and disable fp16 in transcription.
 ``` bash 
-pip install -r requirements.txt
-brew install ffmpeg  # macOS
+
+# Install core scientific libraries (via conda for stability)
+conda install numpy scipy
+
+# Install Whisper and audio libraries
+pip install sounddevice
+pip install git+https://github.com/openai/whisper.git
+
+# Install ffmpeg (required for audio processing)
+brew install ffmpeg
+
+# Install GoogleRecognizer dependencies
+brew install portaudio
+pip install pyaudio
+pip install SpeechRecognition
 ```
 
 ## Project Structure
