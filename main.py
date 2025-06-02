@@ -1,8 +1,14 @@
 ### translingo/main.py
+import sys
 from stt_engine.whisper_engine import WhisperRecognizer
 from stt_engine.google_engine import GoogleRecognizer
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "--pipeline":
+        recognizer = WhisperRecognizer(isPipeline=True)
+        recognizer.run_pipeline_mode()
+        return
+
     print("Select mode:")
     print("1. Manual recording with fixed duration (Whisper)")
     print("2. Real-time streaming with simulated subtitle effect (Whisper)")

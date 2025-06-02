@@ -10,15 +10,37 @@ import threading
 import time
 
 class WhisperRecognizer:
-    def __init__(self, model_size="base"):
+    def __init__(self, isPipeline=False, default_model_size="base"):
         self.SAMPLE_RATE = 16000
         self.CHUNK_DURATION = 3
         self.CHUNK_SIZE = int(self.SAMPLE_RATE * self.CHUNK_DURATION)
         self.OVERLAP = 0.5
         self.audio_q = queue.Queue(maxsize=5)
-        self.model = self.load_selected_model() # whisper.load_model(model_size)
+        if isPipeline:
+            self.model = whisper.load_model(default_model_size)
+        else:
+            self.model = self.load_selected_model() # whisper.load_model(model_size)
         self.transcripts = []
         self.last_text = ""
+
+    def run_pipeline_mode(self):
+        audio_path = "audio_samples/sample_for_pipeline.flac" # (Audio Source: OpenSLR 174-50561-0015.flac)
+        output_path = "output/transcript_for_pipeline.txt"
+
+        print("Loading Whisper model...")
+        model = whisper.load_model("base")
+
+        print(f"Transcribing: {audio_path}")
+        result = model.transcribe(audio_path, fp16=False)
+
+        os.makedirs("output", exist_ok=True)
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(result["text"])
+
+        print("Transcription result:")
+        print(result["text"])
+        print(f"Saved to {output_path}")
+        print("PipeLine Testing Complete")
 
     def load_selected_model(self):
         print("Select Whisper model size:")

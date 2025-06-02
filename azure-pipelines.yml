@@ -34,5 +34,5 @@ steps:
     displayName: 'Install dependencies'
 
   - script: |
-      python main.py
-    displayName: 'Run Translingo main.py'
+      python main.py --pipeline
+    displayName: 'Run Translingo with main.py --pipeline'
