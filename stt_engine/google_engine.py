@@ -8,7 +8,7 @@ import time
 import tempfile
 
 class GoogleRecognizer:
-    def __init__(self):
+    def __init__(self, isPipeline=False):
         self.recognizer = sr.Recognizer()
         self.language_codes = {
             "1": ("Romanian", "ro-RO"),
@@ -18,7 +18,34 @@ class GoogleRecognizer:
             "5": ("Spanish", "es-ES"),
             "6": ("Mandarin", "zh-CN")
         }
-        self.language_name, self.lang_code = self.select_language()
+        if isPipeline:
+            self.language_name, self.lang_code = ("English", "en-US")
+        else:
+            self.language_name, self.lang_code = self.select_language()
+
+    def run_pipeline_mode(self):
+        print("GoogleRecognizer pipeline mode start...")
+
+        audio_path = "audio_samples/sample_for_pipeline.flac"
+        output_path = "output/transcript_google_pipeline.txt"
+        language_code = "en-US"
+        language_name = "English"
+
+        try:
+            with sr.AudioFile(audio_path) as source:
+                audio_data = self.recognizer.record(source)
+                print("Transcribing (Google)...")
+                text = self.recognizer.recognize_google(audio_data, language=language_code)
+                print(f"{language_name}: {text}")
+
+                os.makedirs("output", exist_ok=True)
+                with open(output_path, "w", encoding="utf-8") as f:
+                    f.write(text)
+
+                print(f"Saved to {output_path}")
+        except Exception as e:
+            print(f"Error during Google pipeline transcription: {e}")
+
 
     def select_language(self):
         print("Choose a language for speech recognition:")

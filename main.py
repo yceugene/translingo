@@ -5,8 +5,15 @@ from stt_engine.google_engine import GoogleRecognizer
 
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == "--pipeline":
+        print("=== Pipeline Mode Start ===")
+        # Whisper
         recognizer = WhisperRecognizer(isPipeline=True)
         recognizer.run_pipeline_mode()
+
+        # Google
+        gooRecognizer = GoogleRecognizer(isPipeline=True)
+        gooRecognizer.run_pipeline_mode()
+        print("=== Pipeline Mode Complete ===")
         return
 
     print("Select mode:")

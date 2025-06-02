@@ -40,7 +40,6 @@ class WhisperRecognizer:
         print("Transcription result:")
         print(result["text"])
         print(f"Saved to {output_path}")
-        print("PipeLine Testing Complete")
 
     def load_selected_model(self):
         print("Select Whisper model size:")
