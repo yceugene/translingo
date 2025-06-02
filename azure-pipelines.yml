@@ -1,0 +1,38 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  PYTHON_VERSION: '3.9.9'
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(PYTHON_VERSION)'
+
+  - script: |
+      python -m pip install --upgrade pip
+
+      # Install Whisper and related dependencies
+      pip install numpy scipy
+      pip install sounddevice
+      pip install git+https://github.com/openai/whisper.git
+      pip install pyaudio
+      pip install SpeechRecognition
+
+      # Install ffmpeg and audio drivers
+      sudo apt update
+      sudo apt install -y ffmpeg portaudio19-dev
+
+    displayName: 'Install dependencies'
+
+  - script: |
+      python main.py
+    displayName: 'Run Translingo main.py'
