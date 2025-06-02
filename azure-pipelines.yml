@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  PYTHON_VERSION: '3.9.9'
+  PYTHON_VERSION: '3.9.22'
 
 steps:
   - task: UsePythonVersion@0
