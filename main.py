@@ -21,12 +21,13 @@ def main():
     print("2. Real-time streaming with simulated subtitle effect (Whisper)")
     print("3. Manual recording with fixed duration (Google API)")
     print("4. Real-time streaming (Google API)")
-    choice = input("Enter 1–4: ")
+    print("5. Test")
+    choice = input("Enter 1-4: ")
 
     if choice == "1":
         whiRecognizer = WhisperRecognizer()
         whiRecognizer.manual_mode()
-    elif choice == "2":
+    elif choice == "2": # Real-time streaming
         whiRecognizer = WhisperRecognizer()
         whiRecognizer.streaming_mode()
     elif choice == "3":
@@ -35,6 +36,9 @@ def main():
     elif choice == "4":
         gooRecognizer = GoogleRecognizer()
         gooRecognizer.streaming_mode()
+    elif choice == "5":
+        whiRecognizer = WhisperRecognizer()
+        whiRecognizer.test_input_devices()
     else:
         print("Invalid choice. Exiting.")
 
